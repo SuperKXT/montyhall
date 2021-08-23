@@ -1,23 +1,24 @@
 
 const crypto = require('crypto');
 
-const getPosition = () => (crypto.getRandomValues(new Uint8Array(2)) % 3) + 1 ;
+const iterations = 5
+	, totalOptions = 100000000;
 
-const iterations = 100;
+//const getPosition = () => ((crypto.randomBytes(1).toString('ascii').charCodeAt(0)) % totalOptions) + 1 ;
+const getPosition = () => Math.ceil(Math.random() * totalOptions);
 
 let stay = 0,
 	change = 0;
 
 for (let i = 0; i < iterations; i++) {
 
-	const options = [1,2,3]
-		, [correctPosition, firstChoice] = getPosition()
-		, removedPosition = options.find(option => option !== correctPosition && option !== firstChoice)
-		, secondChoice = options.find(option => option !== firstChoice && option !== removedPosition);
+	const options = [...Array(totalOptions)].map((_, index) => index + 1)
+		, correctPosition = getPosition()
+		, firstChoice = getPosition()
+		, removedPosition = options.filter(option => option !== correctPosition && option !== firstChoice).slice(0, totalOptions - 2)
+		, secondChoice = options.find(option => option !== firstChoice && !removedPosition.includes(option));
 
 	stay += firstChoice === correctPosition ? 1 : 0;
-
-	console.log(correctPosition + ' ' + firstChoice + ' ' + secondChoice);
 
 	change += secondChoice === correctPosition ? 1 : 0;
 
