@@ -1,11 +1,11 @@
 
 const crypto = require('crypto');
 
-const iterations = 5
-	, totalOptions = 100000000;
+const iterations = 1000000
+	, totalOptions = 3;
 
-//const getPosition = () => ((crypto.randomBytes(1).toString('ascii').charCodeAt(0)) % totalOptions) + 1 ;
-const getPosition = () => Math.ceil(Math.random() * totalOptions);
+const getPosition = () => ((crypto.randomBytes(1).toString('ascii').charCodeAt(0)) % totalOptions) + 1 ;
+// // const getPosition = () => Math.ceil(Math.random() * totalOptions);
 
 let stay = 0,
 	change = 0;
