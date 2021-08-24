@@ -1,7 +1,7 @@
 
 const crypto = require('crypto');
 
-const iterations = 1000000
+const iterations = 100000
 	, totalOptions = 3;
 
 const getPosition = () => ((crypto.randomBytes(1).toString('ascii').charCodeAt(0)) % totalOptions) + 1 ;
@@ -24,5 +24,5 @@ for (let i = 0; i < iterations; i++) {
 
 }
 
-console.log(`Stay: ${stay} / ${iterations}, Percentage: ${stay/iterations*100}`);
-console.log(`Change: ${change} / ${iterations}, Percentage: ${change / iterations * 100}`);
+console.log(`Stay: ${stay} / ${iterations}, Percentage: ${(stay/iterations*100).toFixed(3)}`);
+console.log(`Change: ${change} / ${iterations}, Percentage: ${(change / iterations * 100).toFixed(3)}`);
